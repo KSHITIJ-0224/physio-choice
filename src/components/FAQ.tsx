@@ -13,9 +13,9 @@ export function FAQ() {
   return (
     <section className="py-28 px-6 border-t border-border">
       <div className="max-w-5xl mx-auto">
-        <div className="mb-16">
-          <span className="text-[10px] uppercase tracking-[0.25em] font-bold text-primary">FAQ</span>
-          <h2 className="font-display text-5xl md:text-6xl font-extrabold uppercase tracking-tighter leading-[0.9] mt-6">
+        <div className="mb-16 animate-fade">
+          <span className="text-[10px] uppercase tracking-[0.25em] font-bold text-primary animate-fade animate-delay-100">FAQ</span>
+          <h2 className="font-display text-5xl md:text-6xl font-extrabold uppercase tracking-tighter leading-[0.9] mt-6 animate-fade animate-delay-200">
             The <span className="italic text-muted-foreground font-medium">Fine print.</span>
           </h2>
         </div>
@@ -23,23 +23,29 @@ export function FAQ() {
           {faqs.map((f, i) => {
             const isOpen = open === i;
             return (
-              <div key={i} className="border-b border-border">
+              <div 
+                key={i} 
+                className="border-b border-border transition-smooth hover:bg-surface/50 animate-fade"
+                style={{ animationDelay: `${(i + 1) * 80}ms` }}
+              >
                 <button
                   onClick={() => setOpen(isOpen ? null : i)}
-                  className="w-full py-7 flex items-center justify-between gap-6 text-left group"
+                  className="w-full py-7 flex items-center justify-between gap-6 text-left group transition-smooth"
                 >
-                  <span className="font-display text-xl md:text-2xl font-bold uppercase tracking-tight group-hover:text-primary transition-colors">
+                  <span className="font-display text-xl md:text-2xl font-bold uppercase tracking-tight group-hover:text-primary transition-smooth">
                     {f.q}
                   </span>
-                  <span className={`text-2xl font-light transition-transform ${isOpen ? "rotate-45 text-primary" : ""}`}>
+                  <span className={`text-2xl font-light transition-all duration-500 group-hover:text-primary ${isOpen ? "rotate-45 text-primary" : ""}`}>
                     +
                   </span>
                 </button>
                 <div
-                  className={`grid transition-all duration-500 ${isOpen ? "grid-rows-[1fr] opacity-100 pb-8" : "grid-rows-[0fr] opacity-0"}`}
+                  className={`grid transition-all duration-700 ${isOpen ? "grid-rows-[1fr] opacity-100 pb-8" : "grid-rows-[0fr] opacity-0"}`}
                 >
                   <div className="overflow-hidden">
-                    <p className="text-muted-foreground leading-relaxed max-w-2xl">{f.a}</p>
+                    <p className="text-muted-foreground leading-relaxed max-w-2xl pl-0 pr-8 animate-fade">
+                      {f.a}
+                    </p>
                   </div>
                 </div>
               </div>
