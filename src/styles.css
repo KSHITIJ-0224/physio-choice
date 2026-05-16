@@ -1,0 +1,126 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Fonts: Nohemi (display headings) + Satoshi Variable (body) via Fontshare */
+@import url("https://api.fontshare.com/v2/css?f[]=nohemi@300,400,500,600,700,800&f[]=satoshi@300,400,500,700,900&display=swap");
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+
+  --font-display: "Nohemi", "Bricolage Grotesque", sans-serif;
+  --font-body: "Satoshi", "Inter", sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  --radius: 0.25rem;
+
+  /* High-contrast editorial — near-black canvas, bone foreground, signal orange */
+  --background: oklch(0.16 0 0);
+  --foreground: oklch(0.96 0.005 95);
+  --surface: oklch(0.20 0 0);
+  --surface-2: oklch(0.24 0 0);
+
+  --card: oklch(0.20 0 0);
+  --card-foreground: oklch(0.96 0.005 95);
+  --popover: oklch(0.20 0 0);
+  --popover-foreground: oklch(0.96 0.005 95);
+
+  --primary: oklch(0.70 0.22 38);              /* signal orange #FF4F00-ish */
+  --primary-foreground: oklch(0.99 0 0);
+
+  --secondary: oklch(0.24 0 0);
+  --secondary-foreground: oklch(0.96 0.005 95);
+
+  --muted: oklch(0.24 0 0);
+  --muted-foreground: oklch(0.62 0 0);
+
+  --accent: oklch(0.70 0.22 38);
+  --accent-foreground: oklch(0.99 0 0);
+
+  --destructive: oklch(0.62 0.24 27);
+  --destructive-foreground: oklch(0.99 0 0);
+
+  --border: oklch(0.96 0.005 95 / 10%);
+  --input: oklch(0.96 0.005 95 / 14%);
+  --ring: oklch(0.70 0.22 38);
+}
+
+.dark {
+  --background: oklch(0.16 0 0);
+  --foreground: oklch(0.96 0.005 95);
+}
+
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@layer utilities {
+  .animate-reveal { animation: reveal-up 0.9s var(--ease-out-expo) both; }
+  .font-display { font-family: var(--font-display); }
+  .font-body { font-family: var(--font-body); }
+  .input-bare {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--border);
+    padding: 0.5rem 0;
+    font-family: var(--font-body);
+    color: var(--foreground);
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+  .input-bare:focus { border-bottom-color: var(--primary); }
+  .input-bare::placeholder { color: var(--muted-foreground); }
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    color-scheme: dark;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+}
